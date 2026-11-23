@@ -11,6 +11,7 @@ import { validateEnv } from './config/env.validation';
 import { DatabaseModule } from './database/database.module';
 import { HealthModule } from './health/health.module';
 import { MeModule } from './me/me.module';
+import { StreamProfilesModule } from './stream-profiles/stream-profiles.module';
 import { SupabaseModule } from './supabase/supabase.module';
 
 @Module({
@@ -23,6 +24,7 @@ import { SupabaseModule } from './supabase/supabase.module';
     AuditModule,
     HealthModule,
     MeModule,
+    StreamProfilesModule,
   ],
   providers: [
     // Guard order matters: authentication first, so rate limits can be counted per user.
