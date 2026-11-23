@@ -1,0 +1,14 @@
+# The Docker build context is the repository root, so this file applies to every image.
+**/node_modules
+**/dist
+**/coverage
+**/.env
+**/.env.*
+!**/.env.example
+**/*.log
+.git
+.github
+docs
+corrected
+*.docx
+*.pdf
