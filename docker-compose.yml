@@ -1,0 +1,57 @@
+# Local development: a throwaway Postgres with the Neon schema, plus the server.
+# First copy apps/server/.env.example to apps/server/.env and fill in the Supabase values.
+name: ownstream
+
+services:
+  postgres:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ownstream
+      POSTGRES_PASSWORD: ownstream
+      POSTGRES_DB: ownstream
+    ports:
+      - "5432:5432"
+    volumes:
+      - ownstream_pg_data:/var/lib/postgresql/data
+      - ./db/neon_schema.sql:/docker-entrypoint-initdb.d/01_schema.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ownstream -d ownstream"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  server:
+    build:
+      context: .
+      dockerfile: apps/server/Dockerfile
+    restart: unless-stopped
+    env_file:
+      - apps/server/.env
+    environment:
+      NEON_DATABASE_URL: postgresql://ownstream:ownstream@postgres:5432/ownstream
+      DB_SSL: "false"
+      PORT: "3000"
+    ports:
+      - "3000:3000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  # The website service is added when apps/web exists (Implementation Plan v3, section 20.4):
+  # web:
+  #   build:
+  #     context: .
+  #     dockerfile: apps/web/Dockerfile
+  #   restart: unless-stopped
+  #   env_file:
+  #     - apps/web/.env
+  #   environment:
+  #     PORT: "4173"
+  #   ports:
+  #     - "4173:4173"
+  #   depends_on:
+  #     - server
+
+volumes:
+  ownstream_pg_data:
