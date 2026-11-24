@@ -25,3 +25,8 @@ One entry per working day: what was done, which Jira cards, and which commits.
 - Device list, rename and unpair: `GET`, `PATCH` and `DELETE /api/devices` (SCRUM-34). Unpairing revokes the token at once and tells the realtime gateway.
 - Schema: `pairing_codes.secret_hash` and a unique index on `devices.token_hash`.
 - Tested the full pairing flow against a local Postgres in Docker, including two polls at the same moment.
+- Realtime gateway on `/realtime` (SCRUM-37): `host:hello` with the device token, `viewer:hello` with the Supabase token, heartbeats, `host:online` and `host:offline`, `mode:set` and `mode:changed`. Sockets that do not say hello within 10 seconds are closed.
+- Offline check every 30 seconds: hosts with no heartbeat for 45 seconds are marked offline and their socket is closed (SCRUM-38).
+- Encrypted relay (SCRUM-40): `e2e:hello` and `e2e:welcome`, then `chat:*` and `agent:step` forwarded unchanged and only between the owner's browser tab and their host. Channels close when either side leaves or the host leaves AI mode. Attempts on someone else's host go to the audit log.
+- Conversations CRUD with metadata only, and `chat:purge` to the host when a conversation is deleted (SCRUM-41).
+- Tested with real Socket.IO clients (host plus two users) and live against Postgres in Docker.

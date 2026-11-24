@@ -117,3 +117,6 @@ Related corrections:
 - `devices.token_hash` has a unique index, because the device guard looks hosts up by it.
 - `DEVICE_TOKEN_PEPPER` is now required at start up.
 - Added `GET /api/host/device`, so the host app can check that its saved token still works after a restart.
+- The `host:hello` reply lists the IDs of the host's conversations that still exist. A host that was offline when a conversation was deleted removes the local messages of any conversation missing from that list, so `chat:purge` is never lost.
+- The server forwards `host:heartbeat` (CPU, GPU, RAM and mode) to the owner's open browser tabs, so the dashboard can show live numbers.
+- Socket.IO uses the same CORS rule as the REST API (only `PUBLIC_WEB_URL`) and limits one message to 512 KB.
