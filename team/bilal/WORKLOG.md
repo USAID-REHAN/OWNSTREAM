@@ -15,7 +15,8 @@ Add each entry yourself and push it from your own GitHub account.
 - Got the RAWG API key, created the Telegram bot with BotFather and made the Render account (SCRUM-28). Sent the keys to Usaid through a secure link.
 - Personas CRUD module (`/api/personas`) with unit tests (SCRUM-42).
 - The three starter personas (Study helper, Code reviewer, Plain language explainer), created once per user on first use (SCRUM-43).
-- Jira cards: SCRUM-26, 27, 28, 42, 43
+- Postman collection with 21 requests for login, F1, F2, F4, F6 and F7, in `docs/postman` (SCRUM-36, SCRUM-44).
+- Jira cards: SCRUM-26, 27, 28, 36, 42, 43, 44
 
 ## Entry template
 
