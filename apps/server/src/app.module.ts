@@ -9,6 +9,7 @@ import { AllExceptionsFilter } from './common/filters/all-exceptions.filter';
 import { UserThrottlerGuard } from './common/guards/user-throttler.guard';
 import { validateEnv } from './config/env.validation';
 import { DatabaseModule } from './database/database.module';
+import { DevicesModule } from './devices/devices.module';
 import { HealthModule } from './health/health.module';
 import { MeModule } from './me/me.module';
 import { StreamProfilesModule } from './stream-profiles/stream-profiles.module';
@@ -24,6 +25,7 @@ import { SupabaseModule } from './supabase/supabase.module';
     AuditModule,
     HealthModule,
     MeModule,
+    DevicesModule,
     StreamProfilesModule,
   ],
   providers: [
