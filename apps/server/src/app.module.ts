@@ -13,6 +13,7 @@ import { DatabaseModule } from './database/database.module';
 import { DevicesModule } from './devices/devices.module';
 import { HealthModule } from './health/health.module';
 import { MeModule } from './me/me.module';
+import { PersonasModule } from './personas/personas.module';
 import { RealtimeModule } from './realtime/realtime.module';
 import { StreamProfilesModule } from './stream-profiles/stream-profiles.module';
 import { SupabaseModule } from './supabase/supabase.module';
@@ -30,6 +31,7 @@ import { SupabaseModule } from './supabase/supabase.module';
     DevicesModule,
     RealtimeModule,
     ConversationsModule,
+    PersonasModule,
     StreamProfilesModule,
   ],
   providers: [
