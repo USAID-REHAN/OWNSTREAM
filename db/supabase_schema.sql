@@ -39,3 +39,14 @@ drop trigger if exists on_auth_user_created on auth.users;
 create trigger on_auth_user_created
   after insert on auth.users
   for each row execute function public.handle_new_user();
+
+-- Newer Supabase projects do not grant table access automatically, so grant only what is used:
+-- the server (service_role) reads, updates and deletes profiles; a signed-in user may read and update their own row (RLS above).
+grant select, insert, update, delete on public.profiles to service_role;
+grant select, update on public.profiles to authenticated;
+
+-- Creates the profile for any user that signed up before this file was run. Safe to run again.
+insert into public.profiles (id, display_name)
+select id, coalesce(raw_user_meta_data ->> 'display_name', split_part(email, '@', 1))
+from auth.users
+on conflict (id) do nothing;

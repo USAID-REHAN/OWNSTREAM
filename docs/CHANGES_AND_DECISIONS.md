@@ -120,3 +120,4 @@ Related corrections:
 - The `host:hello` reply lists the IDs of the host's conversations that still exist. A host that was offline when a conversation was deleted removes the local messages of any conversation missing from that list, so `chat:purge` is never lost.
 - The server forwards `host:heartbeat` (CPU, GPU, RAM and mode) to the owner's open browser tabs, so the dashboard can show live numbers.
 - Socket.IO uses the same CORS rule as the REST API (only `PUBLIC_WEB_URL`) and limits one message to 512 KB.
+- `db/supabase_schema.sql` now grants table access on `profiles` explicitly. New Supabase projects do not grant it automatically, so the server got "permission denied" until the grants were added. It also creates any missing profile rows for users who signed up before the file was run.
