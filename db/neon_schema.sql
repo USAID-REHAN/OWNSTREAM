@@ -27,6 +27,8 @@ create table devices (
   updated_at timestamptz not null default now()
 );
 create index devices_user_idx on devices (user_id);
+-- The device guard looks hosts up by the HMAC of their token; each token is unique.
+create unique index devices_token_hash_idx on devices (token_hash) where token_hash is not null;
 
 -- F2 pairing codes (created by the host, claimed by the user)
 create table pairing_codes (
@@ -34,6 +36,8 @@ create table pairing_codes (
   code char(6) not null unique,
   host_name text not null,
   host_os text,
+  -- HMAC of the secret only the host knows; needed to collect the device token.
+  secret_hash text not null,
   expires_at timestamptz not null,
   claimed_by_user uuid,
   device_id uuid references devices (id) on delete cascade,

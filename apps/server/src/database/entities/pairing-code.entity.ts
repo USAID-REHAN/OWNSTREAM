@@ -15,6 +15,10 @@ export class PairingCodeEntity {
   @Column({ name: 'host_os', type: 'text', nullable: true })
   hostOs: string | null;
 
+  /** HMAC of the secret only the host knows; the host must send it to collect its device token. */
+  @Column({ name: 'secret_hash', type: 'text' })
+  secretHash: string;
+
   @Column({ name: 'expires_at', type: 'timestamptz' })
   expiresAt: Date;
 

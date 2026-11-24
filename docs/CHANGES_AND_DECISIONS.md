@@ -109,3 +109,11 @@ Related corrections:
 - Restored proposal section 4.7 (Agent Tasks) and the references, which were lost in the submitted proposal. Tables were rebuilt cleanly.
 - Deliverable 2 now marks each requirement as core or bonus. It adds a sequence diagram for AI chat and one for agent tasks, updates the architecture diagram, and includes the Appendix A (entity attributes) that the original referred to but did not include.
 - Usability target changed from "start a game in under 10 minutes" to "pair a host and get a first AI reply in under 10 minutes", because AI is the core.
+
+## 7. Changes made while building (Deliverable 3)
+
+- Pairing now needs a host-only secret. `POST /api/host/pairing-code` returns the six digit code and a `pairingSecret`; the host sends the secret as `X-Pairing-Secret` when it polls `GET /api/host/pairing-status/:code`. Without this, anyone who saw the code on screen could collect the device token before the real host. The table gains `pairing_codes.secret_hash`.
+- The device token is created when the host collects it, not when the user claims the code, so the plain token is never stored. A row lock makes sure it is handed out exactly once.
+- `devices.token_hash` has a unique index, because the device guard looks hosts up by it.
+- `DEVICE_TOKEN_PEPPER` is now required at start up.
+- Added `GET /api/host/device`, so the host app can check that its saved token still works after a restart.
