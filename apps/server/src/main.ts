@@ -4,6 +4,7 @@ import { NestFactory } from '@nestjs/core';
 import type { NestExpressApplication } from '@nestjs/platform-express';
 import helmet from 'helmet';
 import { AppModule } from './app.module';
+import { ConfiguredIoAdapter } from './common/socket-io.adapter';
 import { EnvironmentVariables } from './config/env.validation';
 
 async function bootstrap(): Promise<void> {
@@ -15,6 +16,7 @@ async function bootstrap(): Promise<void> {
   app.setGlobalPrefix('api');
   app.use(helmet());
   app.enableCors({ origin: config.get('PUBLIC_WEB_URL', { infer: true }), credentials: true });
+  app.useWebSocketAdapter(new ConfiguredIoAdapter(app, config.get('PUBLIC_WEB_URL', { infer: true })));
   app.enableShutdownHooks();
 
   const port = config.get('PORT', { infer: true });

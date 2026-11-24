@@ -6,17 +6,29 @@ export interface DeviceRevokedEvent {
   userId: string;
 }
 
+export interface HostOfflineEvent {
+  deviceId: string;
+  userId: string;
+}
+
 /**
- * In-process device events. The realtime gateway subscribes to revoked$ and disconnects the
- * host's live socket as soon as the device is unpaired.
+ * In-process device events.
+ * - revoked$: the realtime gateway disconnects the host's live socket as soon as it is unpaired.
+ * - hostOffline$: a host stopped sending heartbeats or disconnected (the Telegram alerts use this).
  */
 @Injectable()
 export class DeviceEvents {
   private readonly revoked = new Subject<DeviceRevokedEvent>();
+  private readonly offline = new Subject<HostOfflineEvent>();
 
   readonly revoked$: Observable<DeviceRevokedEvent> = this.revoked.asObservable();
+  readonly hostOffline$: Observable<HostOfflineEvent> = this.offline.asObservable();
 
   deviceRevoked(event: DeviceRevokedEvent): void {
     this.revoked.next(event);
+  }
+
+  hostWentOffline(event: HostOfflineEvent): void {
+    this.offline.next(event);
   }
 }

@@ -14,8 +14,14 @@ export class AllExceptionsFilter implements ExceptionFilter {
   private readonly logger = new Logger('Exceptions');
 
   catch(exception: unknown, host: ArgumentsHost): void {
-    const response = host.switchToHttp().getResponse<Response>();
     const body = this.toBody(exception);
+    if (host.getType() !== 'http') {
+      // Realtime handlers answer through acknowledgements and never throw on purpose,
+      // so anything that reaches here is unexpected: log it, never echo details to the socket.
+      this.logger.error(exception instanceof Error ? exception.stack ?? exception.message : String(exception));
+      return;
+    }
+    const response = host.switchToHttp().getResponse<Response>();
     if (body.statusCode >= 500) {
       this.logger.error(exception instanceof Error ? exception.stack ?? exception.message : String(exception));
     }

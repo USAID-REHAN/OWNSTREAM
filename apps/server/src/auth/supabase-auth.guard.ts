@@ -4,6 +4,7 @@ import { SupabaseService } from '../supabase/supabase.service';
 import { AuthCache } from './auth-cache.service';
 import type { AuthenticatedRequest } from './auth-user';
 import { IS_PUBLIC_KEY } from './public.decorator';
+import { verifySupabaseToken } from './verify-supabase-token';
 
 function bearerToken(header: string | undefined): string | null {
   if (!header) return null;
@@ -38,19 +39,11 @@ export class SupabaseAuthGuard implements CanActivate {
       throw new UnauthorizedException('Missing bearer token');
     }
 
-    const cached = this.cache.get(token);
-    if (cached) {
-      request.user = cached;
-      return true;
-    }
-
-    const { data, error } = await this.supabase.admin.auth.getUser(token);
-    if (error || !data.user) {
+    const user = await verifySupabaseToken(this.supabase, this.cache, token);
+    if (!user) {
       throw new UnauthorizedException('Invalid or expired token');
     }
 
-    const user = { id: data.user.id, email: data.user.email ?? null };
-    this.cache.set(token, user);
     request.user = user;
     return true;
   }

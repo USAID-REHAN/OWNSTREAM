@@ -2,7 +2,7 @@ import { ArgumentsHost, BadRequestException, Logger, NotFoundException } from '@
 import { AllExceptionsFilter } from './all-exceptions.filter';
 
 function hostWith(response: { status: jest.Mock; json: jest.Mock }): ArgumentsHost {
-  return { switchToHttp: () => ({ getResponse: () => response }) } as unknown as ArgumentsHost;
+  return { getType: () => 'http', switchToHttp: () => ({ getResponse: () => response }) } as unknown as ArgumentsHost;
 }
 
 describe('AllExceptionsFilter', () => {

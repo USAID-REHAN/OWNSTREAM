@@ -76,3 +76,26 @@ export interface HostHeartbeatPayload {
   ram: number;
   mode: AppMode;
 }
+
+export interface HostHelloPayload {
+  /** The device token the host received when it was paired. */
+  token: string;
+  mode: AppMode;
+}
+
+export interface ViewerHelloPayload {
+  /** The browser's Supabase access token. */
+  token: string;
+}
+
+export interface ModeSetPayload {
+  hostId: string;
+  mode: AppMode;
+}
+
+export interface ChatPurgePayload {
+  conversationId: string;
+}
+
+/** Every realtime acknowledgement has this shape. */
+export type RealtimeAck<T extends object = object> = ({ ok: true } & T) | { ok: false; error: string };
