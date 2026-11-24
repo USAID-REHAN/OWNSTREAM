@@ -5,6 +5,7 @@ const base = {
   NEON_DATABASE_URL: 'postgresql://ownstream:ownstream@localhost:5432/ownstream',
   SUPABASE_URL: 'https://example.supabase.co',
   SUPABASE_SERVICE_ROLE_KEY: 'service-role-key',
+  DEVICE_TOKEN_PEPPER: 'a-pepper-of-at-least-16-chars',
 };
 
 describe('validateEnv', () => {
@@ -24,5 +25,12 @@ describe('validateEnv', () => {
     const { NEON_DATABASE_URL: _omit, ...withoutDb } = base;
 
     expect(() => validateEnv(withoutDb)).toThrow(/NEON_DATABASE_URL/);
+  });
+
+  it('requires a device token pepper of at least 16 characters', () => {
+    const { DEVICE_TOKEN_PEPPER: _omit, ...withoutPepper } = base;
+
+    expect(() => validateEnv(withoutPepper)).toThrow(/DEVICE_TOKEN_PEPPER/);
+    expect(() => validateEnv({ ...base, DEVICE_TOKEN_PEPPER: 'short' })).toThrow(/DEVICE_TOKEN_PEPPER/);
   });
 });

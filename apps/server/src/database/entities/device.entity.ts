@@ -3,6 +3,7 @@ import { Column, CreateDateColumn, Entity, Index, PrimaryGeneratedColumn, Update
 
 @Entity('devices')
 @Index('devices_user_idx', ['userId'])
+@Index('devices_token_hash_idx', ['tokenHash'], { unique: true, where: '"token_hash" IS NOT NULL' })
 export class DeviceEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
@@ -16,6 +17,7 @@ export class DeviceEntity {
   @Column({ type: 'enum', enum: DEVICE_ROLES, enumName: 'device_role', default: 'host' })
   role: DeviceRole;
 
+  /** HMAC-SHA-256 of the device token with DEVICE_TOKEN_PEPPER. The token itself is never stored. */
   @Column({ name: 'token_hash', type: 'text', nullable: true })
   tokenHash: string | null;
 

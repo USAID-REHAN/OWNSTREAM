@@ -64,10 +64,10 @@ export class EnvironmentVariables {
   @IsString()
   TELEGRAM_WEBHOOK_SECRET?: string;
 
-  @IsOptional()
+  /** Secret mixed into every device token hash. Required: hosts cannot pair without it. */
   @IsString()
   @MinLength(16)
-  DEVICE_TOKEN_PEPPER?: string;
+  DEVICE_TOKEN_PEPPER: string;
 
   @IsOptional()
   @IsString()
