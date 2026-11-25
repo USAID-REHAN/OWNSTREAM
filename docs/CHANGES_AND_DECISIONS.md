@@ -121,3 +121,6 @@ Related corrections:
 - The server forwards `host:heartbeat` (CPU, GPU, RAM and mode) to the owner's open browser tabs, so the dashboard can show live numbers.
 - Socket.IO uses the same CORS rule as the REST API (only `PUBLIC_WEB_URL`) and limits one message to 512 KB.
 - `db/supabase_schema.sql` now grants table access on `profiles` explicitly. New Supabase projects do not grant it automatically, so the server got "permission denied" until the grants were added. It also creates any missing profile rows for users who signed up before the file was run.
+- Agent tasks run one at a time per host. A task stays `queued` until its host is online in AI mode, then moves to `running` when `agent:run` is sent. If the host goes offline during a task, the task is marked `failed`. `agent:decision` carries `approve`, `reject` or `cancel`.
+- The rules engine refuses a session when a stored rule has broken settings, instead of skipping it. `allowed_hours` takes an optional `timezone` (default `Asia/Karachi`), and `block_unknown_network` takes `networks`, a list of IP addresses or ranges.
+- Game launch targets are checked by type: `steam://rungameid/ID` for Steam, an Epic launcher link or shortcut for Epic, a full `.exe` path for exe, and one line of text for command.
