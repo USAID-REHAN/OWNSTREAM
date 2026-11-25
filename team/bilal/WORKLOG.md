@@ -23,7 +23,8 @@ Add each entry yourself and push it from your own GitHub account.
 - Access rules CRUD (`/api/access-rules`): allowed hours, approval, idle timeout and known networks, one rule of each type, settings checked with the same function the rules engine uses (SCRUM-47).
 - Alert rules CRUD (`/api/alert-rules`): turn Telegram alerts on or off per event, one per event (SCRUM-52).
 - Unit tests for both, and a live check against Neon showing the rules engine refusing a session outside the allowed hours.
-- Jira cards: SCRUM-47, 52
+- Postman collection now covers F3 Games, F8 Agent tasks, F9 Alert rules and F10 Access rules too (46 requests). Ran all of them against the local server, and added a table of expected replies to `docs/postman/README.md` (SCRUM-53).
+- Jira cards: SCRUM-47, 52, 53
 
 ## Entry template
 

@@ -295,6 +295,207 @@
       ]
     },
     {
+      "name": "F3 Games",
+      "item": [
+        {
+          "name": "GET /games/search?q=days gone",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/games/search?q=days gone",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "games",
+                "search"
+              ],
+              "query": [
+                {
+                  "key": "q",
+                  "value": "days gone"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST /games (Steam / RAWG)",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"rawgId\": 29338,\n  \"launch\": \"steam\",\n  \"launchTarget\": \"steam://rungameid/1259420\",\n  \"isFavorite\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/games",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "games"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST /games (Exe)",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Mafia Definitive Edition\",\n  \"launch\": \"exe\",\n  \"launchTarget\": \"C:\\\\Games\\\\Mafia\\\\mafiadefinitiveedition.exe\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/games",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "games"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET /games",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/games",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "games"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET /games?favorite=true",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/games?favorite=true",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "games"
+              ],
+              "query": [
+                {
+                  "key": "favorite",
+                  "value": "true"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET /games?q=mafia",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/games?q=mafia",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "games"
+              ],
+              "query": [
+                {
+                  "key": "q",
+                  "value": "mafia"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PATCH /games/:id",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"notes\": \"Chapter 5\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/games/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "games",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE /games/:id",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/games/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "games",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
       "name": "F4 Stream profiles",
       "item": [
         {
@@ -595,6 +796,462 @@
               ],
               "path": [
                 "personas",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "F8 Agent tasks",
+      "item": [
+        {
+          "name": "POST /agent-tasks",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"hostDeviceId\": \"<id from GET /devices>\",\n  \"title\": \"Tidy notes\",\n  \"instruction\": \"Sort my notes by subject\",\n  \"allowedTools\": [\n    \"list_files\",\n    \"read_file\",\n    \"write_note\"\n  ],\n  \"workspaceFolder\": \"D:\\\\Notes\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/agent-tasks",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "agent-tasks"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET /agent-tasks",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/agent-tasks",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "agent-tasks"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET /agent-tasks?status=waiting_approval",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/agent-tasks?status=waiting_approval",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "agent-tasks"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "waiting_approval"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PATCH /agent-tasks/:id (approve)",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"action\": \"approve\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/agent-tasks/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "agent-tasks",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PATCH /agent-tasks/:id (reject)",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"action\": \"reject\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/agent-tasks/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "agent-tasks",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PATCH /agent-tasks/:id (cancel)",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"action\": \"cancel\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/agent-tasks/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "agent-tasks",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE /agent-tasks/:id",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/agent-tasks/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "agent-tasks",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "F9 Alert rules",
+      "item": [
+        {
+          "name": "POST /alert-rules",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"event\": \"host_offline\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/alert-rules",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "alert-rules"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET /alert-rules",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/alert-rules",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "alert-rules"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PATCH /alert-rules/:id",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"enabled\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/alert-rules/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "alert-rules",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE /alert-rules/:id",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/alert-rules/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "alert-rules",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "F10 Access rules",
+      "item": [
+        {
+          "name": "POST /access-rules (allowed_hours)",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ruleType\": \"allowed_hours\",\n  \"settings\": {\n    \"start\": \"08:00\",\n    \"end\": \"23:00\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/access-rules",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "access-rules"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST /access-rules (idle_timeout)",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ruleType\": \"idle_timeout\",\n  \"settings\": {\n    \"minutes\": 30\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/access-rules",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "access-rules"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST /access-rules (require_approval)",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ruleType\": \"require_approval\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/access-rules",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "access-rules"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET /access-rules",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/access-rules",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "access-rules"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PATCH /access-rules/:id",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"enabled\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/access-rules/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "access-rules",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE /access-rules/:id",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/access-rules/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "access-rules",
                 ":id"
               ],
               "variable": [
