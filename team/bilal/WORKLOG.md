@@ -18,6 +18,13 @@ Add each entry yourself and push it from your own GitHub account.
 - Postman collection with 21 requests for login, F1, F2, F4, F6 and F7, in `docs/postman` (SCRUM-36, SCRUM-44).
 - Jira cards: SCRUM-26, 27, 28, 36, 42, 43, 44
 
+## Wed 25 Nov 2026
+
+- Access rules CRUD (`/api/access-rules`): allowed hours, approval, idle timeout and known networks, one rule of each type, settings checked with the same function the rules engine uses (SCRUM-47).
+- Alert rules CRUD (`/api/alert-rules`): turn Telegram alerts on or off per event, one per event (SCRUM-52).
+- Unit tests for both, and a live check against Neon showing the rules engine refusing a session outside the allowed hours.
+- Jira cards: SCRUM-47, 52
+
 ## Entry template
 
 ```

@@ -2,7 +2,9 @@ import { Module, ValidationPipe } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { APP_FILTER, APP_GUARD, APP_PIPE } from '@nestjs/core';
 import { ThrottlerModule } from '@nestjs/throttler';
+import { AccessRulesModule } from './access-rules/access-rules.module';
 import { AgentTasksModule } from './agent-tasks/agent-tasks.module';
+import { AlertRulesModule } from './alert-rules/alert-rules.module';
 import { AuditModule } from './audit/audit.module';
 import { AuthModule } from './auth/auth.module';
 import { SupabaseAuthGuard } from './auth/supabase-auth.guard';
@@ -37,6 +39,8 @@ import { SupabaseModule } from './supabase/supabase.module';
     GamesModule,
     AgentTasksModule,
     RulesModule,
+    AccessRulesModule,
+    AlertRulesModule,
     PersonasModule,
     StreamProfilesModule,
   ],
