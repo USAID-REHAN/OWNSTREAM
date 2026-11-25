@@ -1,4 +1,4 @@
-import type { AppMode } from './enums';
+import type { AgentTool, AppMode } from './enums';
 
 export const REALTIME_NAMESPACE = '/realtime';
 
@@ -99,3 +99,33 @@ export interface ChatPurgePayload {
 
 /** Every realtime acknowledgement has this shape. */
 export type RealtimeAck<T extends object = object> = ({ ok: true } & T) | { ok: false; error: string };
+
+/** Server to host: start an agent task (Implementation Plan section 12.4). */
+export interface AgentRunPayload {
+  taskId: string;
+  title: string;
+  instruction: string;
+  tools: AgentTool[];
+  workspaceFolder: string;
+  maxSteps: number;
+  timeLimitSeconds: number;
+}
+
+/** Host to server: a write_note or run_script step waits for the user's approval. */
+export interface AgentApprovalPayload {
+  taskId: string;
+  tool: 'write_note' | 'run_script';
+}
+
+/** Server to host: the user's answer, or a cancel. */
+export interface AgentDecisionPayload {
+  taskId: string;
+  decision: 'approve' | 'reject' | 'cancel';
+}
+
+/** Host to server: final status and a short summary, saved in Neon. */
+export interface AgentFinishedPayload {
+  taskId: string;
+  status: 'done' | 'failed';
+  summary: string;
+}

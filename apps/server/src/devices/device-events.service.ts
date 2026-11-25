@@ -20,9 +20,16 @@ export interface HostOfflineEvent {
 export class DeviceEvents {
   private readonly revoked = new Subject<DeviceRevokedEvent>();
   private readonly offline = new Subject<HostOfflineEvent>();
+  private readonly online = new Subject<HostOfflineEvent>();
 
   readonly revoked$: Observable<DeviceRevokedEvent> = this.revoked.asObservable();
   readonly hostOffline$: Observable<HostOfflineEvent> = this.offline.asObservable();
+  /** A host signed in on the realtime gateway. */
+  readonly hostOnline$: Observable<HostOfflineEvent> = this.online.asObservable();
+
+  hostCameOnline(event: HostOfflineEvent): void {
+    this.online.next(event);
+  }
 
   deviceRevoked(event: DeviceRevokedEvent): void {
     this.revoked.next(event);

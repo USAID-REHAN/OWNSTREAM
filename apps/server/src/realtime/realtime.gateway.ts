@@ -35,20 +35,15 @@ import {
 } from './payloads';
 import { PresenceService } from './presence.service';
 import { RELAY_DIRECTIONS, RelayService } from './relay.service';
+import { ackFail, ackOk, socketData } from './socket-identity';
 
 /** A socket must say hello within this time, or it is disconnected. */
 export const HELLO_TIMEOUT_MS = 10_000;
 const MAX_HELLO_ATTEMPTS = 3;
 
-type Identity = { kind: 'host'; deviceId: string; userId: string } | { kind: 'viewer'; userId: string };
-interface SocketData {
-  identity?: Identity;
-  helloAttempts?: number;
-}
-
-const ok = <T extends object>(data: T = {} as T): RealtimeAck<T> => ({ ok: true, ...data });
-const fail = (error: string): RealtimeAck => ({ ok: false, error });
-const dataOf = (client: Socket) => client.data as SocketData;
+const ok = ackOk;
+const fail = ackFail;
+const dataOf = socketData;
 
 /**
  * The /realtime Socket.IO gateway (Implementation Plan section 9.2).
@@ -129,6 +124,8 @@ export class RealtimeGateway implements OnGatewayInit, OnGatewayConnection, OnGa
 
     await this.safely(() => this.presence.markOnline(device.id, hello.mode));
     this.registry.emitToUser(device.userId, RealtimeEvent.HostOnline, { hostId: device.id, mode: hello.mode });
+    // Lets other modules react, for example sending queued agent tasks to the host.
+    this.deviceEvents.hostCameOnline({ deviceId: device.id, userId: device.userId });
 
     // The host deletes local messages of any conversation not in this list (deleted while it was offline).
     const conversations = await this.conversations.find({ where: { hostDeviceId: device.id }, select: { id: true } });
