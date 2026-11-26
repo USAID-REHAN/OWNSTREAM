@@ -40,3 +40,14 @@ One entry per working day: what was done, which Jira cards, and which commits.
 - Approval flow: `agent:approval` from the host, approve, reject or cancel with `PATCH`, `agent:decision` to the host and `agent:finished` with the summary saved in Neon (SCRUM-46).
 - Rules engine for session requests: allowed hours in the user's time zone, known networks, approval and idle timeout; broken rules refuse the session (SCRUM-48).
 - 22 live checks against the real Neon, Supabase and RAWG pass, including the full approval flow with a paired host.
+
+## Thu 26 Nov 2026
+
+- Session control plane at `/api/sessions` (SCRUM-51): request with ownership, access rules and PC state checks, `session:request` to the PC with the game to launch, approve, reject and end over Socket.IO, history with length, averages and notes. One open session per PC; unanswered requests time out after 2 minutes.
+- Telegram (SCRUM-54): link codes, the webhook with the secret header check, `/start`, `/status`, `/stop` and `/help`, and the alert sender for PC offline and online, new session, stream ended and AI task finished or waiting.
+- Audit interceptor for rule changes, sessions, device rename and Telegram linking (SCRUM-55).
+- Per-route rate limits for sessions, Telegram link codes, the webhook and account deletion, with abuse tests (SCRUM-56).
+- Integration tests with Supertest against a real Postgres, and a CI job that runs them (SCRUM-57).
+- Checked the Dockerfile, docker-compose.yml and render.yaml: the image builds, the container starts and answers the health check with the database up (SCRUM-58).
+- 31 live checks against the real Neon and Supabase with a fake PC on the socket: 30 pass. The one left needs Telegram's API, which the home network blocks; it will be checked on Render.
+- Jira cards: SCRUM-51, 54, 55, 56, 57, 58
