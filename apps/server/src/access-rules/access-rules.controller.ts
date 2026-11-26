@@ -1,4 +1,5 @@
 import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseUUIDPipe, Patch, Post } from '@nestjs/common';
+import { Audited } from '../audit/audited.decorator';
 import type { AuthUser } from '../auth/auth-user';
 import { CurrentUser } from '../auth/current-user.decorator';
 import { AccessRulesService, AccessRuleView } from './access-rules.service';
@@ -9,6 +10,7 @@ export class AccessRulesController {
   constructor(private readonly rules: AccessRulesService) {}
 
   @Post()
+  @Audited('access_rule.created', 'access_rule')
   create(@CurrentUser() user: AuthUser, @Body() dto: CreateAccessRuleDto): Promise<AccessRuleView> {
     return this.rules.create(user.id, dto);
   }
@@ -19,6 +21,7 @@ export class AccessRulesController {
   }
 
   @Patch(':id')
+  @Audited('access_rule.updated', 'access_rule')
   update(
     @CurrentUser() user: AuthUser,
     @Param('id', ParseUUIDPipe) id: string,
@@ -28,6 +31,7 @@ export class AccessRulesController {
   }
 
   @Delete(':id')
+  @Audited('access_rule.deleted', 'access_rule')
   @HttpCode(HttpStatus.NO_CONTENT)
   remove(@CurrentUser() user: AuthUser, @Param('id', ParseUUIDPipe) id: string): Promise<void> {
     return this.rules.remove(user.id, id);

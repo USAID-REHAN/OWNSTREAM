@@ -12,6 +12,7 @@ import {
   Post,
 } from '@nestjs/common';
 import { Throttle } from '@nestjs/throttler';
+import { Audited } from '../audit/audited.decorator';
 import type { AuthUser } from '../auth/auth-user';
 import { CurrentUser } from '../auth/current-user.decorator';
 import { DevicesService, DeviceView } from './devices.service';
@@ -40,6 +41,7 @@ export class DevicesController {
   }
 
   @Patch(':id')
+  @Audited('device.renamed', 'device')
   rename(
     @CurrentUser() user: AuthUser,
     @Param('id', ParseUUIDPipe) id: string,

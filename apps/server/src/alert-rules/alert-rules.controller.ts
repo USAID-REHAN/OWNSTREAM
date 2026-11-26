@@ -1,4 +1,5 @@
 import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseUUIDPipe, Patch, Post } from '@nestjs/common';
+import { Audited } from '../audit/audited.decorator';
 import type { AuthUser } from '../auth/auth-user';
 import { CurrentUser } from '../auth/current-user.decorator';
 import { AlertRulesService, AlertRuleView } from './alert-rules.service';
@@ -9,6 +10,7 @@ export class AlertRulesController {
   constructor(private readonly rules: AlertRulesService) {}
 
   @Post()
+  @Audited('alert_rule.created', 'alert_rule')
   create(@CurrentUser() user: AuthUser, @Body() dto: CreateAlertRuleDto): Promise<AlertRuleView> {
     return this.rules.create(user.id, dto);
   }
@@ -20,6 +22,7 @@ export class AlertRulesController {
 
   /** Turn an alert on or off. */
   @Patch(':id')
+  @Audited('alert_rule.updated', 'alert_rule')
   update(
     @CurrentUser() user: AuthUser,
     @Param('id', ParseUUIDPipe) id: string,
@@ -29,6 +32,7 @@ export class AlertRulesController {
   }
 
   @Delete(':id')
+  @Audited('alert_rule.deleted', 'alert_rule')
   @HttpCode(HttpStatus.NO_CONTENT)
   remove(@CurrentUser() user: AuthUser, @Param('id', ParseUUIDPipe) id: string): Promise<void> {
     return this.rules.remove(user.id, id);
