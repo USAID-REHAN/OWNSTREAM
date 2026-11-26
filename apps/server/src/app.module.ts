@@ -20,8 +20,10 @@ import { MeModule } from './me/me.module';
 import { PersonasModule } from './personas/personas.module';
 import { RealtimeModule } from './realtime/realtime.module';
 import { RulesModule } from './rules/rules.module';
+import { SessionsModule } from './sessions/sessions.module';
 import { StreamProfilesModule } from './stream-profiles/stream-profiles.module';
 import { SupabaseModule } from './supabase/supabase.module';
+import { TelegramModule } from './telegram/telegram.module';
 
 @Module({
   imports: [
@@ -39,6 +41,8 @@ import { SupabaseModule } from './supabase/supabase.module';
     GamesModule,
     AgentTasksModule,
     RulesModule,
+    SessionsModule,
+    TelegramModule,
     AccessRulesModule,
     AlertRulesModule,
     PersonasModule,
