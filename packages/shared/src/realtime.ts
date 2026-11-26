@@ -1,4 +1,4 @@
-import type { AgentTool, AppMode } from './enums';
+import type { AgentTool, AppMode, LaunchType, StreamEngine } from './enums';
 
 export const REALTIME_NAMESPACE = '/realtime';
 
@@ -128,4 +128,41 @@ export interface AgentFinishedPayload {
   taskId: string;
   status: 'done' | 'failed';
   summary: string;
+}
+
+/** Server to host: a viewer wants a session (Implementation Plan sections 9.2 and 10.7). */
+export interface SessionRequestPayload {
+  sessionId: string;
+  engine: StreamEngine;
+  /** The game to start, or null to share the desktop. The host only starts games saved in the user's library. */
+  game: { id: string; title: string; launch: LaunchType; launchTarget: string } | null;
+  profile: { width: number; height: number; frameRate: number; bitrateKbps: number } | null;
+  /** An access rule asks the host to confirm the session on screen first. */
+  needsApproval: boolean;
+  /** End the session after this many idle minutes, if an access rule says so. */
+  idleTimeoutMinutes: number | null;
+}
+
+/** Host to server: the host accepted the session (and launched the game). */
+export interface SessionApprovePayload {
+  sessionId: string;
+}
+
+/** Host to server: the host (or the person at it) refused the session. */
+export interface SessionRejectPayload {
+  sessionId: string;
+  reason?: string;
+}
+
+/** Either side: the session closed. The host adds its averages when it has them. */
+export interface SessionEndPayload {
+  sessionId: string;
+  avgFps?: number;
+  avgLatencyMs?: number;
+}
+
+/** Server to browser: the session is active; ICE servers for the bonus WebRTC stream. */
+export interface SessionReadyPayload {
+  sessionId: string;
+  iceServers: { urls: string | string[]; username?: string; credential?: string }[];
 }
