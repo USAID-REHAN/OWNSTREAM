@@ -1,4 +1,5 @@
 import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Ip, Patch } from '@nestjs/common';
+import { Throttle } from '@nestjs/throttler';
 import type { AuthUser } from '../auth/auth-user';
 import { CurrentUser } from '../auth/current-user.decorator';
 import { UpdateMeDto } from './dto/update-me.dto';
@@ -18,7 +19,9 @@ export class MeController {
     return this.me.updateProfile(user, dto);
   }
 
+  /** Deleting an account cannot be undone, so it gets the tightest limit. */
   @Delete()
+  @Throttle({ default: { limit: 3, ttl: 60_000 } })
   @HttpCode(HttpStatus.NO_CONTENT)
   remove(@CurrentUser() user: AuthUser, @Ip() ip: string): Promise<void> {
     return this.me.deleteAccount(user, ip ?? null);
