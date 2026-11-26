@@ -20,9 +20,37 @@ jobs:
       - run: npm test
       - run: npm run build:server
 
+  # Integration tests (SCRUM-57): the whole server against a throwaway Postgres built from db/neon_schema.sql.
+  integration:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: ownstream
+          POSTGRES_PASSWORD: ownstream
+          POSTGRES_DB: ownstream
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U ownstream -d ownstream"
+          --health-interval 5s
+          --health-timeout 3s
+          --health-retries 10
+    env:
+      E2E_DATABASE_URL: postgresql://ownstream:ownstream@localhost:5432/ownstream
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run test:e2e
+
   docker-build:
     runs-on: ubuntu-latest
-    needs: build-test
+    needs: [build-test, integration]
     steps:
       - uses: actions/checkout@v4
       - uses: docker/setup-buildx-action@v3

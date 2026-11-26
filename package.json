@@ -15,7 +15,8 @@
     "test": "npm run build:shared && npm run test --workspaces --if-present",
     "build:shared": "npm run build -w packages/shared",
     "build:server": "npm run build -w apps/server",
-    "dev:server": "npm run start:dev -w apps/server"
+    "dev:server": "npm run start:dev -w apps/server",
+    "test:e2e": "npm run build:shared && npm run test:e2e -w apps/server"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",
