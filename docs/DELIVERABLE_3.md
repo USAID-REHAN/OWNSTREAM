@@ -66,7 +66,7 @@ All routes start with `/api` and need a Supabase login unless noted. The full li
 | Integration tests (Jest and Supertest) | 13 tests: the whole server against a real Postgres built from the schema, covering tests T03, T04, T15, T16 and T17 from the test plan |
 | CI (GitHub Actions) | On every push: lint, unit tests, build, integration tests with a Postgres service, and the Docker image build |
 | Live checks | Each day the new features were also run against the real Neon and Supabase projects, with a simulated home PC on the socket for the realtime features |
-| Docker | The server image builds and runs with `docker compose up --build` (checked on Usaid's PC; SCRUM-62 checks it on Bilal's PC) |
+| Docker | The server image builds and runs with `docker compose up --build`, checked on both members' PCs (SCRUM-58, SCRUM-62) |
 | Postman | 54 requests in `docs/postman`, run against the server |
 | Deployed server | Running on Render at https://ownstream-server.onrender.com with the Neon database. A test PC on the socket triggered all four Telegram alerts (PC online, session started, stream ended, PC offline) and each reached a phone. Telegram is blocked on the development network, so this is checked on Render (SCRUM-88). |
 
