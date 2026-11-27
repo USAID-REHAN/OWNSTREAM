@@ -31,6 +31,27 @@ Add each entry yourself and push it from your own GitHub account.
 - Rewrote the README: how to run the backend (Node and Docker), every environment variable, the full endpoint list, realtime events, rate limits, tests and Telegram setup (SCRUM-61).
 - Jira cards: SCRUM-61
 
+## Fri 27 Nov 2026
+
+- Added the F5 Sessions and F9 Telegram requests to the Postman collection (54 requests now) and ran all of them against the server, with a test PC approving the session (SCRUM-53).
+- Jira upkeep: `docs/JIRA_COMMIT_MAP.md` links every Sprint 1 card to its commits, or says where the evidence is for hands-on tasks (SCRUM-64).
+- Work log for Deliverable 3 (SCRUM-65).
+- Jira cards: SCRUM-53, 64, 65
+
+## Deliverable 3 summary
+
+| Card | What |
+|---|---|
+| SCRUM-26, 27, 28 | Neon and Supabase projects with the schemas, test users, RAWG key, Telegram bot, Render account |
+| SCRUM-35 | Stream profiles module with three default presets |
+| SCRUM-42, 43 | Personas module and the three starter personas |
+| SCRUM-36, 44, 53 | Postman collection: 54 requests for every module, with a README of expected replies |
+| SCRUM-47 | Access rules module, checked with the same rules the session check uses |
+| SCRUM-52 | Alert rules module |
+| SCRUM-61 | README: how to run, settings, endpoints and tests |
+| SCRUM-59, 60, 62 | Security tests with two accounts, database screenshots, Docker on a second PC |
+| SCRUM-64, 65 | Jira upkeep and this work log |
+
 ## Entry template
 
 ```
