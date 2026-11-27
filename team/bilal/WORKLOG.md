@@ -36,7 +36,8 @@ Add each entry yourself and push it from your own GitHub account.
 - Added the F5 Sessions and F9 Telegram requests to the Postman collection (54 requests now) and ran all of them against the server, with a test PC approving the session (SCRUM-53).
 - Jira upkeep: `docs/JIRA_COMMIT_MAP.md` links every Sprint 1 card to its commits, or says where the evidence is for hands-on tasks (SCRUM-64).
 - Work log for Deliverable 3 (SCRUM-65).
-- Jira cards: SCRUM-53, 64, 65
+- Put the server on Render (https://ownstream-server.onrender.com) with the Neon database, registered the Telegram webhook with its secret, linked my Telegram and turned on four alerts. A test PC triggered all four (PC online, session started, stream ended, PC offline) and each reached my phone (SCRUM-87 server part, SCRUM-88).
+- Jira cards: SCRUM-53, 64, 65, 88
 
 ## Deliverable 3 summary
 
