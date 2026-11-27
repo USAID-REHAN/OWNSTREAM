@@ -1,6 +1,7 @@
 # Ownstream: Deliverable 3 (backend)
 
-Full Stack Web Development Lab, BSCS 5 A, Fall 2026. Submitted Friday 27 November 2026.
+Full Stack Web Development Lab, BSCS 5 A, Fall 2026. Backend finished Friday 27 November 2026; as the instructor asked,
+the whole project is submitted together at the end of December.
 Team: M. Usaidullah Rehan (241815) and M. Bilal (241914).
 
 | | |
