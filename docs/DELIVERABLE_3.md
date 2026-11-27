@@ -68,9 +68,9 @@ All routes start with `/api` and need a Supabase login unless noted. The full li
 | Live checks | Each day the new features were also run against the real Neon and Supabase projects, with a simulated home PC on the socket for the realtime features |
 | Docker | The server image builds and runs with `docker compose up --build` (checked on Usaid's PC; SCRUM-62 checks it on Bilal's PC) |
 | Postman | 54 requests in `docs/postman`, run against the server |
+| Deployed server | Running on Render at https://ownstream-server.onrender.com with the Neon database. A test PC on the socket triggered all four Telegram alerts (PC online, session started, stream ended, PC offline) and each reached a phone. Telegram is blocked on the development network, so this is checked on Render (SCRUM-88). |
 
 ## Not in this deliverable
 
 - The React website and the Windows host app are the next sprints (Jira SCRUM-66 onward). Until then, the API is used through Postman and the tests.
-- Telegram replies and alerts are covered by unit and integration tests. Delivery to a real phone needs the deployed server, because Telegram is blocked on the development network; that check is done on Render (SCRUM-87 and SCRUM-88).
 - Game streaming is the bonus module and comes last.
