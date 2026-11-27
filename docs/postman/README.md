@@ -1,8 +1,8 @@
 # Postman collection
 
-`Ownstream_API.postman_collection.json` holds every backend request built so far (46 requests), grouped by module:
-Login, F1 Profile, F2 Host (no login), F2 Devices, F3 Games, F4 Stream profiles, F6 Conversations, F7 Personas,
-F8 Agent tasks, F9 Alert rules and F10 Access rules.
+`Ownstream_API.postman_collection.json` holds every backend request (54 requests), grouped by module:
+Login, F1 Profile, F2 Host (no login), F2 Devices, F3 Games, F4 Stream profiles, F5 Sessions, F6 Conversations,
+F7 Personas, F8 Agent tasks, F9 Alert rules, F9 Telegram and F10 Access rules.
 
 ## How to use it
 
@@ -30,8 +30,9 @@ The environment is not committed because it holds keys. Never put keys or passwo
    the device token, shown only once. Before step 2 the same request only says `pending`.
 4. The device now shows in **GET /devices**.
 
-**POST /conversations** and **POST /agent-tasks** need `hostDeviceId`: replace `<id from GET /devices>` with the
-`deviceId` from step 3. **POST /games** can take it too, to say which PC the game is installed on.
+**POST /sessions**, **POST /conversations** and **POST /agent-tasks** need `hostDeviceId`: replace
+`<id from GET /devices>` with the `deviceId` from step 3. **POST /games** can take it too, to say which PC the game is
+installed on. For **POST /sessions**, replace `<id from GET /games>` with a game ID, or remove `gameId` to share the desktop.
 
 ## What to expect
 
@@ -41,6 +42,9 @@ The environment is not committed because it holds keys. Never put keys or passwo
 | GET /games/search | 200 | Up to 10 RAWG results. More than 30 a minute gives 429. If RAWG is down it gives 503; add the game by title instead. |
 | POST /games (Steam / RAWG) | 201 | Title, cover and genres are copied from RAWG (`rawgId` 29338 is Days Gone). |
 | POST /games (Exe) | 201 | A launch target that does not fit the launch type gives 400. |
+| POST /sessions | 201, status `requested` | Needs the host app online in streaming mode; without it the reply is 409 *Your PC is offline* or *Switch to streaming mode first*. An access rule can refuse it with 403 and the reason. More than 10 a minute gives 429. |
+| PATCH /sessions/:id | 200 | `{ "action": "end" }` ends the session; `{ "note": "..." }` adds a note. DELETE works only on an ended session (409 otherwise). |
+| POST /telegram/link-code | 201 | A 6 digit code for 10 minutes; send `/start CODE` to the bot. 503 if the server has no bot token. |
 | POST /agent-tasks | 201 | The task stays `queued` until the host app is online in AI mode. |
 | PATCH /agent-tasks/:id (approve or reject) | 409 while queued | Approve and reject work only while the task is `waiting_approval`, which needs the host app running. Cancel works on any open task. |
 | DELETE /agent-tasks/:id | 204 | A running task must be cancelled first (409). |
@@ -50,5 +54,5 @@ The environment is not committed because it holds keys. Never put keys or passwo
 
 ## Clean up after testing
 
-Delete what you created (games, rules, tasks, the test device) so the next test starts clean.
-Deleting the test device also deletes its conversations and agent tasks.
+Delete what you created (games, rules, tasks, sessions, the test device) so the next test starts clean.
+Deleting the test device also deletes its sessions, conversations and agent tasks.
