@@ -37,7 +37,9 @@ Add each entry yourself and push it from your own GitHub account.
 - Jira upkeep: `docs/JIRA_COMMIT_MAP.md` links every Sprint 1 card to its commits, or says where the evidence is for hands-on tasks (SCRUM-64).
 - Work log for Deliverable 3 (SCRUM-65).
 - Put the server on Render (https://ownstream-server.onrender.com) with the Neon database, registered the Telegram webhook with its secret, linked my Telegram and turned on four alerts. A test PC triggered all four (PC online, session started, stream ended, PC offline) and each reached my phone (SCRUM-87 server part, SCRUM-88).
-- Jira cards: SCRUM-53, 64, 65, 88
+- Ran the backend with `docker compose` on my own PC: both containers start and Postgres reports healthy (SCRUM-62).
+- Database screenshots: the Neon tables, rows of `audit_log`, the `devices` columns (the device token is kept only as a hash), and the Supabase users and profiles (SCRUM-60). They go in the final zip.
+- Jira cards: SCRUM-53, 60, 62, 64, 65, 88
 
 ## Deliverable 3 summary
 
@@ -50,7 +52,7 @@ Add each entry yourself and push it from your own GitHub account.
 | SCRUM-47 | Access rules module, checked with the same rules the session check uses |
 | SCRUM-52 | Alert rules module |
 | SCRUM-61 | README: how to run, settings, endpoints and tests |
-| SCRUM-59, 60, 62 | Security tests with two accounts, database screenshots, Docker on a second PC |
+| SCRUM-60, 62 | Database screenshots, Docker on a second PC |
 | SCRUM-64, 65 | Jira upkeep and this work log |
 
 ## Entry template
