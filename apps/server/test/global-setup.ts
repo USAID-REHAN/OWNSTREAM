@@ -5,7 +5,14 @@ import { adminDatabaseUrl, E2E_DB_NAME, e2eDatabaseUrl } from './e2e-database';
 
 async function withDatabase(url: string, work: (db: DataSource) => Promise<unknown>): Promise<void> {
   const db = new DataSource({ type: 'postgres', url, ssl: false });
-  await db.initialize();
+  try {
+    await db.initialize();
+  } catch (err) {
+    throw new Error(
+      `Cannot reach the local Postgres at ${new URL(url).host} (${(err as Error).message || (err as Error).name}). ` +
+        'Start it first with: docker compose up -d postgres',
+    );
+  }
   try {
     await work(db);
   } finally {
