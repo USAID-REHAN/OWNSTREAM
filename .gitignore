@@ -20,3 +20,6 @@ Thumbs.db
 .vscode/*
 !.vscode/extensions.json
 .idea/
+
+# Submission zips are built from the repository, never committed
+submission/

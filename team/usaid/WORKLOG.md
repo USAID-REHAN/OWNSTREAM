@@ -51,3 +51,11 @@ One entry per working day: what was done, which Jira cards, and which commits.
 - Checked the Dockerfile, docker-compose.yml and render.yaml: the image builds, the container starts and answers the health check with the database up (SCRUM-58).
 - 31 live checks against the real Neon and Supabase with a fake PC on the socket: 30 pass. The one left needs Telegram's API, which the home network blocks; it will be checked on Render.
 - Jira cards: SCRUM-51, 54, 55, 56, 57, 58
+
+## Fri 27 Nov 2026
+
+- Deliverable 3 summary in `docs/DELIVERABLE_3.md`: what was asked and where it is, pushes per day, modules, security, tests and what comes next (SCRUM-63).
+- The integration tests now say how to start the local Postgres when they cannot reach it (SCRUM-57).
+- Ran every test again before packaging: 214 unit tests and 13 integration tests pass.
+- Built the backend zip from the pushed code (no keys, no `node_modules`) for the submission (SCRUM-63).
+- Jira cards: SCRUM-63
